@@ -92,3 +92,59 @@ exports.postData = (req, res) => {
     request.end();
 
 };
+
+// @desc Put data
+// @route PUT - /h/put-data/:id
+// @access public
+exports.putData = (req, res) => {
+    const data = JSON.stringify({
+        name: "Noul",
+        job: "Akuntan"
+    });
+
+    const options = {
+        hostname: 'reqres.in',
+        path: '/api/users/' + req.params.id,
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(data),
+        }
+    };
+
+    const request = https.request(options, (response) => {
+        response.on('data', (chunk) => {
+            res.send(chunk);
+        });
+        response.on('error', (e) => {
+            res.send(e);
+        });
+    });
+
+    request.write(data);
+    request.on('error', (e) => console.error(e));
+    request.end();
+};
+
+// @desc Delete data
+// @route PUT - /h/delete-data/:id
+// @access public
+exports.deleteData = (req, res) => {
+    const options = {
+        hostname: 'reqres.in',
+        path: '/api/users/' + req.params.id,
+        method: 'DELETE'
+    };
+
+    const request = https.request(options, (response) => {
+        console.log(response.statusCode);
+
+        response.on('error', (e) => {
+            res.send(e);
+        });
+    });
+
+    request.on('error', (e) => console.error(e));
+    request.on('finish', () => res.send('Sukses hapus data'));
+    request.end();
+};
