@@ -1,22 +1,9 @@
 const router = require('express').Router();
 const https = require('https');
+const h_controllers = require('../controllers/h_controllers');
 
-router.get('/', (req, res) => {
-    https.get('https://reqres.in/api/users?page=1', (response) => {
-        let responseData = '';
-
-        response.setEncoding('utf-8');
-
-        response.on('data', (chunk) => {
-            responseData += chunk;
-        });
-
-        response.on('end', () => {
-            response.statusCode = 200;
-            const responseObj = JSON.parse(responseData);
-            res.send(responseObj.data[0]);
-        });
-    });
-});
+router.get('/get-all-data', h_controllers.getAllData);
+router.get('/get-user/:id', h_controllers.getUserById);
+router.post('/post-data', h_controllers.postData);
 
 module.exports = router;

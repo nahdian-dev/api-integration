@@ -1,12 +1,17 @@
 const express = require('express');
-const h_routes = require('./routes/h_routes');
 require('dotenv').config();
+const h_routes = require('./routes/h_routes');
+const error_handling = require('./middlewares/error_handling');
 
+// Instance
 const app = express();
 const port = process.env.PORT || 5001;
 
 // Routes
 app.use('/h', h_routes);
+
+// Error Handling
+app.use(error_handling.route_not_found);
 
 // Server
 app.listen(port, () => {
