@@ -16,7 +16,6 @@ app.use('/', (req, res) => {
                 path: "https://informasi-cuaca.vercel.app/a/current-weather/jakarta",
                 description: "Mendapatkan informasi cuaca terkini berdasarkan nama kota"
             },
-            ,
             {
                 path: "https://informasi-cuaca.vercel.app/a/forecast-weather/-6.240168999214124/106.79907426901781/5",
                 description: "Mendapatkan informasi lamaran cuaca berdasarkan latitude dan longtitude dan lamaran untuk berapa hari kedepan"
