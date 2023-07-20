@@ -15,9 +15,9 @@ exports.currentWeather = (req, res) => {
 };
 
 exports.forecastWeather = (req, res) => {
-    const lat = '-6.341076116125288';
-    const long = '106.7918721633142';
-    const days = '5';
+    const lat = req.params.lat;
+    const long = req.params.long;
+    const days = req.params.days;
 
     axios.get(`http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${lat},${long}&days=${days}`)
         .then((value) => {
