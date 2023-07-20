@@ -7,7 +7,11 @@ exports.currentWeather = (req, res) => {
     axios.get(`http://api.weatherapi.com/v1/current.json?key=${key}&q=${req.params.city}`)
         .then((value) => {
             const resObj = JSON.stringify(value.data);
-            res.send(resObj);
+            res.status(200).json({
+                status: 'succes',
+                code: 200,
+                data: resObj
+            });
         })
         .catch((error) => {
             res.status(error.response.status).send(error.response.statusText);
@@ -22,7 +26,11 @@ exports.forecastWeather = (req, res) => {
     axios.get(`http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${lat},${long}&days=${days}`)
         .then((value) => {
             const resObj = JSON.stringify(value.data);
-            res.send(resObj);
+            res.status(200).json({
+                status: 'succes',
+                code: 200,
+                data: resObj
+            });
         })
         .catch((error) => {
             res.status(error.response.status).send(error.response.statusText);

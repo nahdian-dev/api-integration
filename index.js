@@ -9,6 +9,8 @@ const app = express();
 const port = process.env.PORT || 5001;
 
 // Routes
+app.use('/h', h_routes);
+app.use('/a', a_routes);
 app.use('/', (req, res) => {
     res.json({
         endpoints: [
@@ -25,8 +27,6 @@ app.use('/', (req, res) => {
         source: "https://github.com/nahdian-dev/api-integration.git"
     });
 });
-app.use('/h', h_routes);
-app.use('/a', a_routes);
 
 // Error Handling
 app.use(error_handling.route_not_found);
